@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Results for {{q}}</title>
+</head>
+<body>
+    <div class="container">
+        You searched for {{q}}
+        <br>
+        {% for user in users %}
+            <div class="card">
+              <div class="card-body">
+                {{user.name}}
+              </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</body>
+</html>

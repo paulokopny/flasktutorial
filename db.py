@@ -11,7 +11,6 @@ _users = {
         'job_title': 'Designer',
         'workplace': 'ArtLebedev'
     },
-
     'boris': {
         'name': 'Boris Ivanov',
         'job_title': 'Cat',
@@ -34,19 +33,11 @@ for login, user_data in _users.items():
     _user_list.append(_new_element)
 
 
-
-
-
 # Get users filtered by name
 def get_users_by_name(q):
     results = []
     # SEARCH
-
-
-
     return results
-
-
 
 
 def get_user(username):

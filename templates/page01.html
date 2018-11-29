@@ -12,9 +12,12 @@
         <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
     </div>
 
+    <div class="container">
+        <h3>Users: </h3>
         {% for user in users %}
-            {{user[1]}}
+            <span class="label label-default">{{user[1]}}</span>
         {% endfor%}
+    </div>
 
     <div class="container">
 

@@ -22,6 +22,20 @@ def hello_world():
     return render_template('page01.html', users=users)
 
 
+@app.route('/user/<login>/')
+def user_page(login):
+    conn = sqlite3.connect('app.db')
+    c = conn.cursor()
+
+    # Handler logic here
+    c.execute("SELECT * FROM users WHERE login='%s'" % login)
+    user_data = list(c.fetchone())
+
+    # Close connection
+    conn.close()
+    return str(user_data)
+
+
 @app.route('/search')
 def search_for_person():
     q = request.args.get('query')

@@ -15,7 +15,10 @@
     <div class="container">
         <h3>Users: </h3>
         {% for user in users %}
-            <span class="label label-default">{{user[1]}}</span>
+            <span class="label label-default">
+                <a href="/user/{{user[4]}}/">{{user[1]}}</a>
+            </span>
+            <br />
         {% endfor%}
     </div>
 

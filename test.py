@@ -6,10 +6,18 @@ import sqlite3
 app = Flask(__name__)
 
 
+def dict_factory(cursor, row):
+    d = {}
+    for idx, col in enumerate(cursor.description):
+        d[col[0]] = row[idx]
+    return d
+
+
 @app.route('/')
 def hello_world():
     # Connecting to DB
     conn = sqlite3.connect('app.db')
+    conn.row_factory = dict_factory
     c = conn.cursor()
 
     # Handler logic here
@@ -25,15 +33,16 @@ def hello_world():
 @app.route('/user/<login>/')
 def user_page(login):
     conn = sqlite3.connect('app.db')
+    conn.row_factory = dict_factory
     c = conn.cursor()
 
     # Handler logic here
     c.execute("SELECT * FROM users WHERE login='%s'" % login)
-    user_data = list(c.fetchone())
+    user_data = c.fetchone()
 
     # Close connection
     conn.close()
-    return str(user_data)
+    return render_template("userpage.html", user=user_data)
 
 
 @app.route('/add_user', methods=['GET', 'POST'])

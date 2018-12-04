@@ -48,6 +48,8 @@ def user_page(login):
 @app.route('/add_user', methods=['GET', 'POST'])
 def add_user():
 
+    user_created = False
+
     if request.method == 'POST':
         # add new user data
         user = {}
@@ -68,9 +70,10 @@ def add_user():
         conn.commit()
         conn.close()
         # redirect to user page
-        return redirect('/user/%s/' % user['login'])
+        # return redirect('/user/%s/' % user['login'])
+        user_created = True
 
-    return render_template("add_user.html")
+    return render_template("add_user.html", user_created=user_created)
 
 
 @app.route('/search')

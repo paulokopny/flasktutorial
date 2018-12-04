@@ -1,6 +1,6 @@
 from flask import Flask
 from flask import render_template
-from flask import request
+from flask import request, redirect
 import db
 import sqlite3
 app = Flask(__name__)
@@ -34,6 +34,34 @@ def user_page(login):
     # Close connection
     conn.close()
     return str(user_data)
+
+
+@app.route('/add_user', methods=['GET', 'POST'])
+def add_user():
+
+    if request.method == 'POST':
+        # add new user data
+        user = {}
+        user['login'] = request.form.get('login')
+        user['name'] = request.form.get('name')
+        user['job_title'] = request.form.get('job_title')
+        user['workplace'] = request.form.get('workplace')
+        user['photo'] = request.form.get('photo')
+
+        # save to database
+        conn = sqlite3.connect('app.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO users "
+                  "(login, name, workplace, job_title, photo) "
+                  "VALUES "
+                  "('{login}','{name}','{workplace}','{job_title}','{photo}')"
+                  "".format(**user))
+        conn.commit()
+        conn.close()
+        # redirect to user page
+        return redirect('/user/%s/' % user['login'])
+
+    return render_template("add_user.html")
 
 
 @app.route('/search')

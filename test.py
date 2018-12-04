@@ -6,8 +6,6 @@ import sqlite3
 app = Flask(__name__)
 
 
-
-
 @app.route('/')
 def hello_world():
     # Connecting to DB
@@ -29,8 +27,6 @@ def search_for_person():
     q = request.args.get('query')
     users = db.get_users_by_name(q)
     return render_template('search_results.html', q=q, users=users)
-
-
 
 
 app.run()

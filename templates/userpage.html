@@ -6,10 +6,23 @@
     <title>My Super Appplication</title>
 </head>
 <body>
-    {% if user %}
-        <h1>Hello, {{user.name}}!</h1>
-    {% else %}
+    {% if not user %}
         <div class="alert alert-warning">User not found!</div>
     {% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <img src="{%if user.photo%}
+                {{user.photo}}
+                {%else%}
+                https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg
+                {%endif%}" class="img-thumbnail">
+            </div>
+            <div class="col-sm">
+                <h1>{{user.name}}</h1>
+                <p>Works as {{user.job_title}} at {{user.workplace}}</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

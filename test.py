@@ -63,6 +63,7 @@ def add_user():
         # save to database
         conn = sqlite3.connect('app.db')
         c = conn.cursor()
+
         c.execute("SELECT * FROM users where login='%s'" % user['login'])
         if c.fetchone():
             # user with this login is already in my database
@@ -77,8 +78,7 @@ def add_user():
             user_created = True
         conn.close()
         # redirect to user page
-        # return redirect('/user/%s/' % user['login'])
-
+        return redirect('/user/%s/' % user['login'])
 
     return render_template(
         "add_user.html",

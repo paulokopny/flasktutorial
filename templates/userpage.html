@@ -8,13 +8,13 @@
 <body>
     {% if not user %}
         <div class="alert alert-warning">User not found!</div>
-    {% endif %}
+    {% else %}
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <img src="{%if user.photo%}
+                <img src="{%if user.photo %}
                 {{user.photo}}
-                {%else%}
+                {% else %}
                 https://image.freepik.com/free-icon/male-user-shadow_318-34042.jpg
                 {%endif%}" class="img-thumbnail">
             </div>
@@ -24,5 +24,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </body>
 </html>
